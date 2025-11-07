@@ -94,7 +94,64 @@ describe('Arithmetic', function () {
     });
 
 // TODO: Challenge #1
- 
+describe('Power', function () {
+    it('raises a positive integer to a positive integer', function (done) {
+        request.get('/arithmetic?operation=power&operand1=2&operand2=5')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 32 });
+                done();
+            });
+    });
+    it('raises to the power of zero', function (done) {
+        request.get('/arithmetic?operation=power&operand1=5&operand2=0')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 1 });
+                done();
+            });
+    });
+    it('handles negative exponent', function (done) {
+        request.get('/arithmetic?operation=power&operand1=2&operand2=-3')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 0.125 });
+                done();
+            });
+    });
+    it('handles zero base with positive exponent', function (done) {
+        request.get('/arithmetic?operation=power&operand1=0&operand2=5')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 0 });
+                done();
+            });
+    });
+    it('handles negative base with odd exponent', function (done) {
+        request.get('/arithmetic?operation=power&operand1=-3&operand2=3')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: -27 });
+                done();
+            });
+    });
+    it('handles negative base with even exponent', function (done) {
+        request.get('/arithmetic?operation=power&operand1=-2&operand2=4')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 16 });
+                done();
+            });
+    });
+    it('supports fractional exponent (square root)', function (done) {
+        request.get('/arithmetic?operation=power&operand1=9&operand2=0.5')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 3 });
+                done();
+            });
+    });
+});
 
     describe('Multiplication', function () {
         it('multiplies two positive integers', function (done) {
