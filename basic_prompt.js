@@ -1,1 +1,0 @@
-const prompt = `Create a JavaScript function named \`toCamelCase\` that takes a string as input and returns the string converted to camelCase. CamelCase means the first letter of each word is capitalized except for the first word, and all spaces and special characters are removed. For example, 'hello world example' should become 'helloWorldExample'.`;
