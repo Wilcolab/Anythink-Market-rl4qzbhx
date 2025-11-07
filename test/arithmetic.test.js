@@ -42,6 +42,25 @@ describe('Arithmetic', function () {
         });
     });
 
+    describe('Power', function () {
+        it('raises a positive integer to an integer power', function (done) {
+            request.get('/arithmetic?operation=power&operand1=2&operand2=3')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 8 });
+                    done();
+                });
+        });
+        it('handles fractional exponents', function (done) {
+            request.get('/arithmetic?operation=power&operand1=4&operand2=0.5')
+                .expect(200)
+                .end(function (err, res) {
+                    expect(res.body).to.eql({ result: 2 });
+                    done();
+                });
+        });
+    });
+
     describe('Addition', function () {
         it('adds two positive integers', function (done) {
             request.get('/arithmetic?operation=add&operand1=21&operand2=21')
