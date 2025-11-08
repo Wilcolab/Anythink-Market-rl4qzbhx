@@ -1,0 +1,14 @@
+services:
+  python-server:
+    build:
+      context: ./python-server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+
+  node-server:
+    build:
+      context: ./javascript-express-server
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"

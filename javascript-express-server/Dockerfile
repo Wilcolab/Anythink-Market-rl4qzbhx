@@ -1,10 +1,10 @@
-FROM node:14
+FROM node:18-slim
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY package.json yarn.lock ./
 
-RUN yarn install
+RUN corepack enable && yarn install --frozen-lockfile
 
 COPY . .
 
