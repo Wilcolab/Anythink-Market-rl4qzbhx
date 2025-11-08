@@ -1,4 +1,4 @@
-# GitHub Copilot Workshop
+# GitHub Copilot Workshop Updated
 
 ## Enhance a Node Calculator app using GitHub Copilot
 
