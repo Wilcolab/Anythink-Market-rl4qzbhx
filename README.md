@@ -1,39 +1,78 @@
-# Python Server AAA
+
+# Task List Server Migration: Python → Node.js
+
+This project originally contained a FastAPI server implemented in Python for managing a simple task list. The backend has now been migrated to a Node.js Express server for improved scalability and performance.
+
+## Project Structure
+
+- `python-server/`: Legacy FastAPI server (Python)
+- `javascript-express-server/`: New Node.js Express server
+- `docker-compose.yml`: Runs both servers for migration/testing
+
+## Running Both Servers
+
+To run both the Python and Node.js servers using Docker Compose:
+
+```shell
+docker compose up --build
+```
+
+This will start:
+- Python FastAPI server on port **8000**
+- Node.js Express server on port **8001**
+
+## API Routes (Node.js Express)
+
+- `GET /` — Returns "Hello World"
+- `GET /tasks` — Retrieves the task list
+- `POST /tasks` — Adds a task to the list (expects `{ "text": "your task" }` in JSON body)
+
+## Migration Details
+
+- All endpoints and logic from the Python FastAPI server have been ported to the Node.js Express server.
+- The Python server is still available for reference and comparison.
+
+## Example Usage
+
+Add a new task:
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{"text": "My new task"}' http://localhost:8001/tasks
+```
+
+Get all tasks:
+```shell
+curl http://localhost:8001/tasks
+```
+
+---
+
+For legacy FastAPI (Python) usage, see the original instructions below:
+
+---
+
+# Python Server (Legacy)
 
 This project contains a FastAPI server implemented in Python. It provides two routes for managing a task list.
 
 ## Project Structure
 
-The project has the following files and directories:
+- `python-server/src/main.py`: FastAPI server implementation
+- `python-server/src/__init__.py`: Marks the `src` directory as a Python package
+- `python-server/requirements.txt`: Python dependencies
+- `python-server/Dockerfile`: Docker image for FastAPI server
+- `docker-compose.yml`: Multi-container orchestration
 
-- `python-server/src/main.py`: This file contains the implementation of the FastAPI server with two routes. It handles adding a task to a list and retrieving the list.
+## Getting Started (Python)
 
-- `python-server/src/__init__.py`: This file is an empty file that marks the `src` directory as a Python package.
+To run the FastAPI server using Docker:
 
-- `python-server/requirements.txt`: This file lists the dependencies required for the FastAPI server and other dependencies.
+```shell
+docker compose up --build
+```
 
-- `python-server/Dockerfile`: This file is used to build a Docker image for the FastAPI server. It specifies the base image, copies the source code into the image, installs the dependencies, and sets the command to run the server.
+The FastAPI server will be available at port `8000`.
 
-- `docker-compose.yml`: This file is used to define and run multi-container Docker applications. It specifies the services to run, their configurations, and any dependencies between them.
-
-## Getting Started
-
-To run the FastAPI server using Docker, follow these steps:
-
-- Build and start the Docker containers by running the following command:
-
-  ```shell
-  docker compose up
-  ```
-
-  This command will build the Docker image for the FastAPI server and start the containers defined in the `docker-compose.yml` file.
-
-- The FastAPI server should now be running. You can access at port `8000`.
-
-## API Routes
-
-The FastAPI server provides the following API routes:
+## API Routes (Python)
 
 - `POST /tasks`: Adds a task to the task list. The request body should contain the task details.
-
 - `GET /tasks`: Retrieves the task list.
