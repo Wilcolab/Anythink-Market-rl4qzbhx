@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-
 class Task(BaseModel):
     text: str
 
@@ -26,8 +25,3 @@ def read_root():
 def add_task(task: Task):
     tasks.append(task.text)
     return {"message": "Task added successfully"}
-
-
-@app.get("/tasks")
-def get_tasks():
-    return {"tasks": tasks}
